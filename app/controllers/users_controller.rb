@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:show]
+  before_action :authorize_user!, only: [:index]
 
   def index
     @users = User.all
   end
 
+ 
   def show
     @user = User.find(params[:id])
   end
@@ -30,5 +32,11 @@ class UsersController < ApplicationController
         :first_name,
         :last_name,
       )
+    end
+
+    def authorize_user!
+      if !current_user || !current_user.admin?
+        redirect_to new_user_session_path
+      end
     end
 end
