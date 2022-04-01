@@ -3,7 +3,11 @@ class UsersController < ApplicationController
   before_action :authorize_user!, only: [:index]
 
   def index
-    @users = User.all
+    if params[:approved] == "false"
+      @users = User.where(approved: false)
+    else
+      @users = User.all
+    end
   end
 
  
@@ -12,12 +16,12 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
   end
 
   def update
     respond_to do |format|
-      if current_user.update(user_params)
+      if User.find(params[:id]).update(user_params)
         format.html {redirect_to current_user ,notice: 'You successfully updated your profile' }
       else 
         format.html {render :edit}
@@ -31,6 +35,7 @@ class UsersController < ApplicationController
       params.require(:user).permit(
         :first_name,
         :last_name,
+        :approved,
       )
     end
 
