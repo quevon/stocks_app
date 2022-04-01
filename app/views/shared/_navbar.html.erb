@@ -6,9 +6,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+       
         
-        
-        <% if user_signed_in? %>
+        <% if user_signed_in? && current_user.admin? %>
             <li class="nav-item">
                 <%= link_to 'Sign Out', destroy_user_session_path,method: :delete, :class => 'nav-link' %>
             </li>
@@ -17,8 +17,18 @@
             </li>
             <li class="nav-item">
               <%= link_to 'Users', users_path, :class => 'nav-link' %>
-            </li>       
+            </li>     
+        <% elsif user_signed_in? && !current_user.admin? %>  
+             <li class="nav-item">
+                <%= link_to 'Sign Out', destroy_user_session_path,method: :delete, :class => 'nav-link' %>
+            </li>
+             <li class="nav-item">
+              <%= link_to 'Profile', user_path(current_user),:class => 'nav-link' %>
+            </li>
         <%else%>
+            <li class="nav-item">
+              <%= link_to 'Home', root_path, :class => 'nav-link' %>
+            </li>
             <li class="nav-item">
                 <%= link_to 'Register', new_user_registration_path, :class => 'nav-link' %>
             </li>
