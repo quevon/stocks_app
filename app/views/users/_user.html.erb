@@ -5,9 +5,9 @@
     <td><%= user.admin %></td>
      <td style ="color: green;">
         <%if user.approved == false %>
-            <%=user.approved = link_to  'Inactive', active_user_path(user), method: :patch, data: {confirm: "Do you want to active #{user.full_name}?"},:class => 'link', style: "color: red;" %>
+            <%=user.approved = link_to  'Inactive', active_user_path(user), method: :patch, data: {confirm: "Do you want to activate #{user.full_name}?"},:class => 'link', style: "color: red;" %>
         <%else%>
-            <%=user.approved = link_to  'Active', inactive_user_path(user), method: :patch, data: {confirm: "Do you want to inactive #{user.full_name}?"},:class => 'link', style: "color: green;" %>
+            <%=user.approved = link_to  'Active', inactive_user_path(user), method: :patch, data: {confirm: "Do you want to deactivate #{user.full_name}?"},:class => 'link', style: "color: green;" %>
         <%end %>
     </td>
     <td><%= link_to "Edit", edit_user_path(user) %></td>
