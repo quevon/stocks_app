@@ -1,12 +1,8 @@
- <li>
-    <%= link_to user.full_name, user%>
-</li>
- <li>
-    <%= link_to user.email, user%>
-</li>
- <li>
-    <%= link_to user.approved, user%>
-</li>
- <li>
-    <%= link_to "Edit", edit_user_path(user)%>
-</li>
+
+<tr>
+    <td><%= link_to user.full_name, user %></td>
+    <td><%= link_to user.email, user %></td>
+    <td><%= link_to user.admin, user %></td>
+    <td><%= link_to user.approved, user %></td>
+    <td><%= link_to "Edit", edit_user_path(user) %></td>
+</tr>
