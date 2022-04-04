@@ -1,8 +1,14 @@
 
 <tr>
-    <td><%= link_to user.full_name, user %></td>
-    <td><%= link_to user.email, user %></td>
-    <td><%= link_to user.admin, user %></td>
-    <td><%= link_to user.approved, user %></td>
+    <td><%= user.full_name %></td>
+    <td><%= user.email %></td>
+    <td><%= user.admin %></td>
+     <td style ="color: green;">
+        <%if user.approved == false %>
+            <%=user.approved = link_to  'Inactive', active_user_path(user), method: :patch, data: {confirm: "Do you want to active #{user.full_name}?"},:class => 'link', style: "color: red;" %>
+        <%else%>
+            <%=user.approved = link_to  'Active', inactive_user_path(user), method: :patch, data: {confirm: "Do you want to inactive #{user.full_name}?"},:class => 'link', style: "color: green;" %>
+        <%end %>
+    </td>
     <td><%= link_to "Edit", edit_user_path(user) %></td>
 </tr>

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:show]
-  before_action :authorize_user!, only: [:index]
+  before_action :authorize_user!, only: [:index, :active , :inactive]
 
   def index
     if params[:approved] == "false"
@@ -9,7 +9,17 @@ class UsersController < ApplicationController
       @users = User.all
     end
   end
+  def active
+    @user = User.find(params[:id])
+    @user.update approved: true
+    redirect_to users_path
+  end
 
+  def inactive
+    @user = User.find(params[:id])
+    @user.update approved: false
+    redirect_to users_path
+  end
  
   def show
     @user = User.find(params[:id])

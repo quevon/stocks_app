@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users, only: [:index, :show, :edit, :update] 
+  patch 'users/:id/active', to: 'users#active', as: 'active_user'
+  patch 'users/:id/inactive', to: 'users#inactive', as: 'inactive_user'
+
 
 
   
